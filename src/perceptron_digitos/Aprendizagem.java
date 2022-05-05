@@ -21,16 +21,16 @@ public class Aprendizagem {
 
     private double weight[][] = new double[16][4];
     private double target[][] = {
-        {1, 1, 1, 1},
-        {1, 1, 1, -1},
-        {1, 1, -1, 1},
-        {1, 1, -1, -1},
-        {1, -1, 1, 1},
-        {1, -1, 1, -1},
-        {1, -1, -1, 1},
-        {1, -1, -1, -1},
+        {-1, -1, -1, -1},
+        {-1, 1, -1, -1},
+        {-1, -1, 1, -1},
+        {-1, 1, 1, -1},
         {-1, 1, 1, 1},
-        {-1, 1, 1, -1}
+        {1, -1, -1, -1},
+        {1, 1, -1, -1},
+        {1, -1, 1, -1},
+        {1, 1, 1, -1},
+        {1, 1, 1, 1}
     };
     
     private int epocas;
@@ -55,7 +55,7 @@ public class Aprendizagem {
         double yent = 0;
         
         for (int column = 0; column < 16; column++) {
-            yent = yent + x[line][column] * weight[column][perceptron];
+            yent = yent + (x[line][column] * weight[column][perceptron]);
         }
         
         return yent;
@@ -93,15 +93,11 @@ public class Aprendizagem {
             }
         }
         
-        // Número de colunas de X precisa ser igual ao número de linhas de W
-
-        // Irá percorrer cada uma das linhas da matriz 
         for (int perceptron = 0; perceptron < 4; perceptron++) {
             do {
                 mudou = false;
 
                 for (int line = 0; line < 10; line++) {
-                    // Calcular o yent referente aquela linha
                     yent = somatorio(line, perceptron);
                     
                     fyent[line][perceptron] = saida(yent, limiar);

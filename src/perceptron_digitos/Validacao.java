@@ -54,6 +54,10 @@ public class Validacao {
             fyent[perceptron] = saida(yent, limiar);
         }
         
+        for (double f : fyent) {
+            System.out.println(f);
+        }
+        
         if (Arrays.equals(fyent, t[0])) {
             return "0";
         } else if (Arrays.equals(fyent, t[1])) {

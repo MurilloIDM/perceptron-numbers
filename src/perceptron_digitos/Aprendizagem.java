@@ -32,6 +32,7 @@ public class Aprendizagem {
         {-1, 1, 1, 1},
         {-1, 1, 1, -1}
     };
+    
     private int epocas;
 
     public Aprendizagem() {
@@ -52,9 +53,11 @@ public class Aprendizagem {
 
     public double somatorio(int line, int perceptron) {
         double yent = 0;
+        
         for (int column = 0; column < 16; column++) {
-            yent = yent + x[line][column] * weight[line][perceptron];
+            yent = yent + x[line][column] * weight[column][perceptron];
         }
+        
         return yent;
     }
 
@@ -74,7 +77,7 @@ public class Aprendizagem {
     public void atualiza(double alfa, double fyent[][], int perceptron) {
         for (int line = 0; line < 10; line++) {
             for (int column = 0; column < 16; column++) {
-                weight[line][column] = weight[line][column] + alfa * (target[line][perceptron] - fyent[line][perceptron]) * x[line][column];
+                weight[column][perceptron] = weight[column][perceptron] + alfa * (target[line][perceptron] - fyent[line][perceptron]) * x[line][column];
             }
         }
     }
@@ -84,12 +87,13 @@ public class Aprendizagem {
         double fyent[][] = new double[10][4];
         boolean mudou;
 
-        // Zerar os pesos
         for (int line = 0; line < 16; line++) {
             for (int column = 0; column < 4; column++) {
                 weight[line][column] = 0;
             }
         }
+        
+        // Número de colunas de X precisa ser igual ao número de linhas de W
 
         // Irá percorrer cada uma das linhas da matriz 
         for (int perceptron = 0; perceptron < 4; perceptron++) {
@@ -99,12 +103,14 @@ public class Aprendizagem {
                 for (int line = 0; line < 10; line++) {
                     // Calcular o yent referente aquela linha
                     yent = somatorio(line, perceptron);
+                    
                     fyent[line][perceptron] = saida(yent, limiar);
 
                     if (fyent[line][perceptron] != target[line][perceptron]) {
                         mudou = true;
                     }
                 }
+                
                 if (mudou == true) {
                     atualiza(alfa, fyent, perceptron);
                 }

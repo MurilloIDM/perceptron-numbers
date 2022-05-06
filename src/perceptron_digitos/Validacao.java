@@ -26,7 +26,7 @@ public class Validacao {
             }
         }
         
-        for (int j = 1; j < 16; j++) {
+        for (int j = 0; j < 16; j++) {
             yent = yent + entrada[j] * w[j][perceptron];
         }
         
